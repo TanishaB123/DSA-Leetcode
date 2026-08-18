@@ -1,0 +1,28 @@
+class Solution {
+public:
+int func(vector<int>& nums,int low, int high){
+    int pivot = nums[low];
+    int i = low;
+    int j = high;
+    while(i<j){
+        while(pivot>=nums[i]&&i<=high-1){i++;}
+        while(pivot<nums[j]&&j>low-1){j--;}
+        if(i<j){
+            swap(nums[i],nums[j]);
+        }
+    }
+    swap(nums[low],nums[j]);
+    return j;
+}
+
+void qs(vector<int>& nums, int low, int high){
+    if(low>=high){return;}
+    int pindex = func(nums,low,high);
+    qs(nums,low,pindex-1);
+    qs(nums,pindex+1,high);
+}
+    void sortColors(vector<int>& nums) {
+        int low=0,high = nums.size()-1;
+        qs(nums,low,high);
+    }
+};
